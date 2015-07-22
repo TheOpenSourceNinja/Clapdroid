@@ -9,17 +9,28 @@
 			size: self.size
 			pos: self.pos
 	
-	#Foreground
+	#This makes these things accessible from the Python object as, e.g., self.dateLabel rather than the more cumbersome self.ids["dateLabel"]
+	dateLabel: dateLabel
+	titleInput: titleInput
+	clapButton: clapButton
+	sceneInput: sceneInput
+	shotInput: shotInput
+	takeInput: takeInput
+	
 	BoxLayout:
 		orientation: 'vertical'
 		size: root.size
 		Button:
 			text: "Clap!"
 			size_hint: (1, .25)
+			font_size: 70
+			id: clapButton
 		TextInput:
 			text: 'Movie Title'
+			id: titleInput
 			size_hint: (1, .25)
 			multiline: False
+			font_size: 70
 		BoxLayout:
 			orientation: "horizontal"
 			size_hint: (1, .25)
@@ -31,8 +42,10 @@
 					color: 0,0,0,1
 					size_hint: (1, .2)
 				TextInput:
-					text: "Scene #"
+					text: "1"
 					multiline: False
+					font_size: 70
+					id: sceneInput
 			BoxLayout:
 				orientation: "vertical"
 				size_hint: (.3, 1)
@@ -41,8 +54,10 @@
 					color: 0,0,0,1
 					size_hint: (1, .2)
 				TextInput:
-					text: "Shot #"
+					text: "1"
 					multiline: False
+					font_size: 70
+					id: shotInput
 			BoxLayout:
 				orientation: "vertical"
 				size_hint: (.3, 1)
@@ -51,9 +66,15 @@
 					color: 0,0,0,1
 					size_hint: (1, .2)
 				TextInput:
-					text: "Take #"
+					text: "1"
 					multiline: False
+					font_size: 70
+					id: takeInput
 		Label:
 			text: "Date"
+			id: dateLabel
 			size_hint: (1, .25)
 			color: 0,0,0,1
+			font_size: 70
+			halign: "center"
+			valign: "middle"
