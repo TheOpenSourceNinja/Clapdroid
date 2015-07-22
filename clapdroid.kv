@@ -1,0 +1,59 @@
+#:kivy 1.0.9
+
+<Clapboard>:
+	#Background
+	canvas.before:
+		Color:
+			rgba: 1, 1, 1, 1 #white
+		Rectangle:
+			size: self.size
+			pos: self.pos
+	
+	#Foreground
+	BoxLayout:
+		orientation: 'vertical'
+		size: root.size
+		Button:
+			text: "Clap!"
+			size_hint: (1, .25)
+		TextInput:
+			text: 'Movie Title'
+			size_hint: (1, .25)
+			multiline: False
+		BoxLayout:
+			orientation: "horizontal"
+			size_hint: (1, .25)
+			BoxLayout:
+				orientation: "vertical"
+				size_hint: (.3, 1)
+				Label:
+					text: "Scene #:"
+					color: 0,0,0,1
+					size_hint: (1, .2)
+				TextInput:
+					text: "Scene #"
+					multiline: False
+			BoxLayout:
+				orientation: "vertical"
+				size_hint: (.3, 1)
+				Label:
+					text: "Shot #:"
+					color: 0,0,0,1
+					size_hint: (1, .2)
+				TextInput:
+					text: "Shot #"
+					multiline: False
+			BoxLayout:
+				orientation: "vertical"
+				size_hint: (.3, 1)
+				Label:
+					text: "Take #:"
+					color: 0,0,0,1
+					size_hint: (1, .2)
+				TextInput:
+					text: "Take #"
+					multiline: False
+		Label:
+			text: "Date"
+			size_hint: (1, .25)
+			color: 0,0,0,1

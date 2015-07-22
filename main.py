@@ -6,11 +6,14 @@ import kivy
 kivy.require("1.9.0") #my current version as of 2015-07-21. Beware of using older versions.
 
 from kivy.app import App
-from kivy.uix.button import Label
+from kivy.uix.widget import Widget
 
-class ClapDroid(App):
+class Clapboard(Widget):
+	pass
+
+class ClapdroidApp(App):
 	def build(self):
-		return Label(text="Clap!")
+		return Clapboard()
 
 if __name__ == "__main__":
-	ClapDroid().run()
+	ClapdroidApp().run()
