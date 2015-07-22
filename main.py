@@ -1,5 +1,8 @@
-#!/usr/bin/python3
+#!/usr/bin/python2
+#Note: I usually program in Python 3, but 3 isn't well supported yet by kivy/buildozer.
 __version__ = "0.1" #The version of Clapdroid. Will stay at 0.1 until I decide on a versin numbering scheme.
+
+import six
 
 import kivy
 kivy.require("1.9.0") #my current version as of 2015-07-21. Beware of using older versions.
@@ -11,6 +14,7 @@ from kivy.clock import Clock
 from kivy.uix.textinput import TextInput
 from kivy.core.audio import SoundLoader
 import time
+import sys
 
 class Clapboard(Widget):
 	def __init__(self, **kwargs):
@@ -24,11 +28,13 @@ class Clapboard(Widget):
 	def clap(self, instance):
 		print("Clapping!")
 		if self.sound:
-			print( "Sound found at", self.sound.source )
-			print( "Sound is %.3f seconds" % self.sound.length )
+			six.print_( "test", file=sys.stderr )
+			six.print_( self.sound, file=sys.stderr )
+			six.print_( "Sound found at", self.sound.source, file=sys.stderr )
+			six.print_( "Sound is %.3f seconds" % self.sound.length, file=sys.stderr )
 			self.sound.play()
 		else:
-			print( "Sound must be loaded before clap() is called!", file=stderr )
+			six.print_( "Sound must be loaded before clap() is called!", file=sys.stderr )
 	
 	def ensureTitleCase(self, instance, value):
 		instance.text = instance.text.title()
@@ -43,6 +49,22 @@ class Clapboard(Widget):
 class ClapdroidApp(App):
 	def build(self):
 		return Clapboard()
+	
+	def on_stop(self):
+		#TODO: Save important data here
+		pass
+	
+	def on_start(self):
+		#TODO: Load important data here
+		pass
+	
+	def on_pause(self):
+		#TODO: Save important data here
+		return True
+	
+	def on_resume(self):
+		#TODO: Load important data here
+		pass
 
 if __name__ == "__main__":
 	ClapdroidApp().run()
