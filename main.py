@@ -8,6 +8,7 @@ from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.properties import ObjectProperty
 from kivy.clock import Clock
+from kivy.uix.textinput import TextInput
 
 import time
 
@@ -16,17 +17,10 @@ class Clapboard(Widget):
 		super(Clapboard, self).__init__(**kwargs)
 		self.updateTime(dt = 0)
 		Clock.schedule_interval(self.updateTime, 1.0)
-		self.sceneInput.bind(text=self.enforceNumericity)
-		self.shotInput.bind(text=self.enforceNumericity)
-		self.takeInput.bind(text=self.enforceNumericity)
+		self.titleInput.bind( text=self.ensureTitleCase )
 	
-	def enforceNumericity(self, instance, value):
-		'''Enforce the numericity of the given text.
-		Args:
-			instance: The widget whose text has changed, causing this function to be called.
-			value: The widget's new text.
-		'''
-		instance.text = "".join( filter( lambda c: c.isnumeric(), value ) )
+	def ensureTitleCase(self, instance, value):
+		instance.text = instance.text.title()
 	
 	def updateTime(self, dt):
 		'''Update the date label.
