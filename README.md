@@ -14,7 +14,8 @@ Buildozer will automatically download the following required software.
 ## for Android:
 
 ### To build:
-In a terminal, cd to the Clapdroid directory and run the command `buildozer android debug`
+1. Optional but recommended: Set the environment variable $APP_PACKAGE_DOMAIN to a domain you own.
+2. In a terminal, cd to the Clapdroid directory and run the command `buildozer android debug`
 
 ### To run:
 1. Connect an Android device or start an Android emulator.

@@ -7,7 +7,8 @@ title = Clapdroid
 package.name = clapdroid
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = org.test
+#When building this app, be sure to override this setting with the $APP_PACKAGE_DOMAIN environment variable.
+package.domain = invalid.domain
 
 # (str) Source code where the main.py live
 source.dir = .
