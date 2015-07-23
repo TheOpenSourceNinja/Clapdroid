@@ -16,6 +16,12 @@
 	sceneInput: sceneInput
 	shotInput: shotInput
 	takeInput: takeInput
+	sceneUpButton: sceneUpButton
+	sceneDownButton: sceneDownButton
+	#shotUpButton: shotUpButton
+	#shotDownButton: shotDownButton
+	#takeUpButton: takeUpButton
+	#takeDownButton: takeDownButton
 	
 	BoxLayout:
 		orientation: 'vertical'
@@ -42,13 +48,25 @@
 					text: "Scene #:"
 					color: 0,0,0,1
 					size_hint: (1, .2)
-				TextInput:
-					hint_text: "Scene #"
-					multiline: False
-					font_size: 70
-					id: sceneInput
-					input_filter: "int"
-					input_type: "number"
+				BoxLayout:
+					orientation: "horizontal"
+					TextInput:
+						hint_text: "Scene #"
+						multiline: False
+						font_size: 70
+						id: sceneInput
+						input_filter: "int"
+						input_type: "number"
+					BoxLayout:
+						orientation: "vertical"
+						Button:
+							text:"🠝"
+							color: 0,0,0,1
+							id: sceneUpButton
+						Button:
+							text:"🠟"
+							color: 0,0,0,1
+							id: sceneDownButton
 			BoxLayout:
 				orientation: "vertical"
 				size_hint: (.3, 1)
