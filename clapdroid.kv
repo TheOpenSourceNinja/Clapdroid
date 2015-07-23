@@ -18,10 +18,10 @@
 	takeInput: takeInput
 	sceneUpButton: sceneUpButton
 	sceneDownButton: sceneDownButton
-	#shotUpButton: shotUpButton
-	#shotDownButton: shotDownButton
-	#takeUpButton: takeUpButton
-	#takeDownButton: takeDownButton
+	shotUpButton: shotUpButton
+	shotDownButton: shotDownButton
+	takeUpButton: takeUpButton
+	takeDownButton: takeDownButton
 	
 	BoxLayout:
 		orientation: 'vertical'
@@ -59,13 +59,12 @@
 						input_type: "number"
 					BoxLayout:
 						orientation: "vertical"
+						size_hint: (.2, 1)
 						Button:
-							text:"🠝"
-							color: 0,0,0,1
+							text:"up"
 							id: sceneUpButton
 						Button:
-							text:"🠟"
-							color: 0,0,0,1
+							text:"down"
 							id: sceneDownButton
 			BoxLayout:
 				orientation: "vertical"
@@ -74,13 +73,24 @@
 					text: "Shot #:"
 					color: 0,0,0,1
 					size_hint: (1, .2)
-				TextInput:
-					hint_text: "Shot #"
-					multiline: False
-					font_size: 70
-					id: shotInput
-					input_filter: "int"
-					input_type: "number"
+				BoxLayout:
+					orientation: "horizontal"
+					TextInput:
+						hint_text: "Shot #"
+						multiline: False
+						font_size: 70
+						id: shotInput
+						input_filter: "int"
+						input_type: "number"
+					BoxLayout:
+						orientation: "vertical"
+						size_hint: (.2, 1)
+						Button:
+							text:"up"
+							id: shotUpButton
+						Button:
+							text:"down"
+							id: shotDownButton
 			BoxLayout:
 				orientation: "vertical"
 				size_hint: (.3, 1)
@@ -88,13 +98,24 @@
 					text: "Take #:"
 					color: 0,0,0,1
 					size_hint: (1, .2)
-				TextInput:
-					hint_text: "Take #"
-					multiline: False
-					font_size: 70
-					id: takeInput
-					input_filter: "int"
-					input_type: "number"
+				BoxLayout:
+					orientation: "horizontal"
+					TextInput:
+						hint_text: "Take #"
+						multiline: False
+						font_size: 70
+						id: takeInput
+						input_filter: "int"
+						input_type: "number"
+					BoxLayout:
+						orientation: "vertical"
+						size_hint: (.2, 1)
+						Button:
+							text:"up"
+							id: takeUpButton
+						Button:
+							text:"down"
+							id: takeDownButton
 		Label:
 			text: "Date"
 			id: dateLabel

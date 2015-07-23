@@ -16,6 +16,16 @@ from kivy.core.audio import SoundLoader
 import time
 import sys
 
+class fake():
+	def exists(self):
+		return false
+
+#Possibly Android specific; we want the app to work on as many platforms as possible
+try:
+	from plyer import vibrator
+except ImportError:
+	vibrator = fake()
+
 class Clapboard(Widget):
 	def __init__(self, **kwargs):
 		super(Clapboard, self).__init__(**kwargs)
@@ -24,17 +34,47 @@ class Clapboard(Widget):
 		self.titleInput.bind( text=self.ensureTitleCase )
 		self.clapButton.bind( on_press=self.clap )
 		self.sound = SoundLoader.load('clap.ogg')
+		self.sceneUpButton.bind( on_press=self.increment )
+		self.sceneDownButton.bind( on_press=self.increment )
+		self.shotUpButton.bind( on_press=self.increment )
+		self.shotDownButton.bind( on_press=self.increment )
+		self.takeUpButton.bind( on_press=self.increment )
+		self.takeDownButton.bind( on_press=self.increment )
+	
+	def addNumber(self, old, new):
+		if not old.isdigit():
+			old = "0"
+		
+		num = int( old ) + new
+		if( num < 0 ):
+			num = 0
+		
+		return str( num )
+	
+	def increment(self, instance):
+		if instance == self.sceneUpButton:
+			self.sceneInput.text = self.addNumber( self.sceneInput.text, 1 )
+		elif instance == self.sceneDownButton:
+			self.sceneInput.text = self.addNumber( self.sceneInput.text, -1 )
+		elif instance == self.shotUpButton:
+			self.shotInput.text = self.addNumber( self.shotInput.text, 1 )
+		elif instance == self.shotDownButton:
+			self.shotInput.text = self.addNumber( self.shotInput.text, -1 )
+		elif instance == self.takeUpButton:
+			self.takeInput.text = self.addNumber( self.takeInput.text, 1 )
+		elif instance == self.takeDownButton:
+			self.takeInput.text = self.addNumber( self.takeInput.text, -1 )
 	
 	def clap(self, instance):
-		print("Clapping!")
+		#six.print_("Clapping!")
 		if self.sound:
-			six.print_( "test", file=sys.stderr )
-			six.print_( self.sound, file=sys.stderr )
-			six.print_( "Sound found at", self.sound.source, file=sys.stderr )
-			six.print_( "Sound is %.3f seconds" % self.sound.length, file=sys.stderr )
+			#six.print_( "test", file=sys.stderr )
+			#six.print_( self.sound, file=sys.stderr )
+			#six.print_( "Sound found at", self.sound.source, file=sys.stderr )
+			#six.print_( "Sound is %.3f seconds" % self.sound.length, file=sys.stderr )
 			self.sound.play()
-		else:
-			six.print_( "Sound must be loaded before clap() is called!", file=sys.stderr )
+		if vibrator.exists():
+			vibrator.vibrate(1)
 	
 	def ensureTitleCase(self, instance, value):
 		instance.text = instance.text.title()

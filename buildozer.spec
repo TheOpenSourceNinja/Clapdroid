@@ -33,7 +33,7 @@ version.filename = %(source.dir)s/main.py
 
 # (list) Application requirements
 # comma seperated e.g. requirements = sqlite3,kivy
-requirements = kivy,six
+requirements = kivy,six,plyer
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -43,10 +43,10 @@ requirements = kivy,six
 #garden_requirements =
 
 # (str) Presplash of the application
-#presplash.filename = %(source.dir)s/data/presplash.png
+presplash.filename = %(source.dir)s/data/presplash.png
 
 # (str) Icon of the application
-#icon.filename = %(source.dir)s/data/icon.png
+icon.filename = %(source.dir)s/data/icon.png
 
 # (str) Supported orientation (one of landscape, portrait or all)
 orientation = landscape
@@ -60,7 +60,7 @@ fullscreen = 1
 #
 
 # (list) Permissions
-android.permissions = WAKE_LOCK, MODIFY_AUDIO_SETTINGS, FLASHLIGHT
+android.permissions = WAKE_LOCK, VIBRATE
 
 # (int) Android API to use
 android.api = 17
