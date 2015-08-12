@@ -7,7 +7,7 @@ title = Clapdroid
 package.name = clapdroid
 
 # (str) Package domain (needed for android/ios packaging)
-#When building this app, be sure to override this setting with the $APP_PACKAGE_DOMAIN environment variable.
+# When building this app, be sure to override this setting with the $APP_PACKAGE_DOMAIN environment variable. In fish, the variable can be set permanently using "set -U". See file:///usr/share/doc/fish/tutorial.html#tut_universal
 package.domain = invalid.domain
 
 # (str) Source code where the main.py live

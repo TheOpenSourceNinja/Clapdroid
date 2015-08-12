@@ -11,6 +11,7 @@ from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.clock import Clock
 from kivy.core.audio import SoundLoader
+from kivy.graphics import *
 import time
 import sys
 import os
@@ -148,6 +149,13 @@ class ClapdroidApp(App):
 		'''
 		self.clapboard = Clapboard()
 		return self.clapboard
+	
+	def build_config(self, config):
+		config.setdefaults( "main", {
+			"vibrate": True
+		})
+	
+	#def build_settings(self):
 	
 	def saveData(self):
 		'''Save data.

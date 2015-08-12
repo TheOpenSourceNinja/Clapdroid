@@ -14,7 +14,7 @@ Buildozer will automatically download the following required software.
 ## for Android:
 
 ### To build:
-1. Optional but recommended: Set the environment variable $APP_PACKAGE_DOMAIN to a domain you own.
+1. Optional but recommended: Set the environment variable $APP_PACKAGE_DOMAIN to a domain you own. In Android, the package name (a combination of the domain and the app's name) is used to uniquely identify an app. Thus, packages you create with your domain will be different from packages created by somebody else with their domain.
 2. In a terminal, cd to the Clapdroid directory and run the command `buildozer android debug`
 
 ### To run:
