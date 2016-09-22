@@ -12,6 +12,7 @@ from kivy.uix.widget import Widget
 from kivy.clock import Clock
 from kivy.core.audio import SoundLoader
 from kivy.graphics import *
+from kivy.core.window import Window
 import time
 import sys
 import os
@@ -28,18 +29,18 @@ try:
 except ImportError:
 	vibrator = fake()
 
-class Clapboard(Widget):
-	def __init__(self, **kwargs):
+class Clapboard( Widget ):
+	def __init__( self, **kwargs ):
 		'''Initialize the clapboard.
 			Args:
 				**kwargs: Ignored by this class, passed to parent class.
 		'''
-		super(Clapboard, self).__init__(**kwargs)
-		self.updateTime(dt = 0)
-		Clock.schedule_interval(self.updateTime, 1.0)
+		super( Clapboard, self ).__init__( **kwargs )
+		self.updateTime( dt = 0 )
+		Clock.schedule_interval( self.updateTime, 1.0 )
 		self.titleInput.bind( text=self.ensureTitleCase )
 		self.clapButton.bind( on_press=self.clap )
-		self.sound = SoundLoader.load('clap.ogg')
+		self.sound = SoundLoader.load( 'clap.ogg' )
 		self.sceneUpButton.bind( on_press=self.adjustByOne )
 		self.sceneDownButton.bind( on_press=self.adjustByOne )
 		self.shotUpButton.bind( on_press=self.adjustByOne )
@@ -47,7 +48,7 @@ class Clapboard(Widget):
 		self.takeUpButton.bind( on_press=self.adjustByOne )
 		self.takeDownButton.bind( on_press=self.adjustByOne )
 	
-	def addNumber(self, old, new):
+	def addNumber( self, old, new ):
 		'''Add a given number to another given number.
 			Args:
 				old: A string representing an integer.
@@ -64,7 +65,7 @@ class Clapboard(Widget):
 		
 		return str( num )
 	
-	def adjustByOne(self, instance):
+	def adjustByOne( self, instance ):
 		'''Increment or decrement a number.
 			Args:
 				instance: The object which caused this function to be called.
@@ -82,18 +83,20 @@ class Clapboard(Widget):
 		elif instance == self.takeDownButton:
 			self.takeInput.text = self.addNumber( self.takeInput.text, -1 )
 	
-	def clap(self, instance):
+	def clap( self, instance ):
 		'''Produce simultaneous visual and audio output.
 			Args:
 				instance: (ignored) The object which caused this function to be called
 		'''
 		if self.sound:
 			self.sound.play()
+		Color( 1., 1., 1. )
+		Rectangle( pos=( 10, 10 ), size=( 500, 500 ) )
 		if vibrator.exists():
 			vibrator.vibrate(1) #Vibrate for one second
 		# TODO: Find a way to flash the screen, activate the camera flash, or some other visual output aside from the button looking like it's being pressed.
 	
-	def ensureTitleCase(self, instance, value):
+	def ensureTitleCase( self, instance, value ):
 		'''Ensure that the movie title is title case.
 			Args:
 				instance: The object whose text content has just been changed
@@ -101,14 +104,14 @@ class Clapboard(Widget):
 		'''
 		instance.text = instance.text.title()
 	
-	def updateTime(self, dt):
+	def updateTime( self, dt ):
 		'''Update the date label.
 			Args:
 				dt: According to Kivy's documentation, "the time elapsed between the scheduling and the calling of the callback" where this function is the callback. DT stands for Delta Time.
 		'''
-		self.dateLabel.text = time.strftime("%F %T")
+		self.dateLabel.text = time.strftime( "%F %T" )
 	
-	def saveData(self, theFile):
+	def saveData( self, theFile ):
 		'''Save data.
 			Args:
 				theFile: An already-open file into which to save the data.
@@ -118,14 +121,14 @@ class Clapboard(Widget):
 		theFile.write( "shot:" + self.shotInput.text + "\n" )
 		theFile.write( "take:" + self.takeInput.text + "\n" )
 	
-	def loadData(self, theFile):
+	def loadData( self, theFile ):
 		'''Load data.
 			Args:
 				theFile: An already-open file from which to load the data.
 		'''
 		for line in theFile:
 			line = line.strip()
-			data = line.partition(":")
+			data = line.partition( ":" )
 			begin = data[0].strip().lower()
 			if begin == "title":
 				self.titleInput.text = data[2]
@@ -139,25 +142,25 @@ class Clapboard(Widget):
 				if data[2].isdigit():
 					self.takeInput.text = data[2]
 
-class ClapdroidApp(App):
-	def __init__(self):
-		super(ClapdroidApp, self).__init__()
+class ClapdroidApp( App ):
+	def __init__( self ):
+		super( ClapdroidApp, self ).__init__()
 		self.saveFilePath = self.user_data_dir + "/state"
 	
-	def build(self):
+	def build( self ):
 		'''Create whatever widgets the app needs to start. Other widgets may be created later.
 		'''
 		self.clapboard = Clapboard()
 		return self.clapboard
 	
-	def build_config(self, config):
+	def build_config( self, config ):
 		config.setdefaults( "main", {
 			"vibrate": True
 		})
 	
 	#def build_settings(self):
 	
-	def saveData(self):
+	def saveData( self ):
 		'''Save data.
 		'''
 		try:
@@ -170,7 +173,7 @@ class ClapdroidApp(App):
 		except IOError, error:
 			six.print_( "IOError caught in saveData():", error, file=sys.stderr )
 	
-	def loadData(self):
+	def loadData( self ):
 		'''Load data.
 		'''
 		try:
@@ -181,25 +184,25 @@ class ClapdroidApp(App):
 		except IOError, error:
 			six.print_( "IOError caught in loadData():", error, file=sys.stderr )
 	
-	def on_stop(self):
+	def on_stop( self ):
 		'''When the program exits, save data.
 		'''
 		self.saveData()
 		pass
 	
-	def on_start(self):
+	def on_start( self ):
 		'''When the program starts, load data.
 		'''
 		self.loadData()
 		pass
 	
-	def on_pause(self):
+	def on_pause( self ):
 		'''When execution is paused, save data - the program might be killed without calling on_resume().
 		'''
 		self.saveData()
 		return True
 	
-	def on_resume(self):
+	def on_resume( self ):
 		'''When execution is resumed (after being paused), load data.
 		'''
 		self.loadData()
